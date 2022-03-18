@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// Project name: AnotherDataPersistence 
 public class Paddle : MonoBehaviour
 {
     public float Speed = 2.0f;

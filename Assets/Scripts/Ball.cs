@@ -6,6 +6,9 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;
+    public AudioClip brickSFX;
+    public AudioClip bounceSFX;
+    public AudioClip burnSFX;
 
     void Start()
     {
@@ -32,5 +35,23 @@ public class Ball : MonoBehaviour
         }
 
         m_Rigidbody.velocity = velocity;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Brick"))
+        {
+            Debug.Log("Collided.");
+            GameObject.Find("SoundManager").GetComponent<AudioSource>().PlayOneShot(brickSFX, 0.5f);
+        }
+        if (collision.gameObject.CompareTag("Static Wall"))
+        {
+            GameObject.Find("SoundManager").GetComponent<AudioSource>().PlayOneShot(bounceSFX, 1);
+        }
+        if (collision.gameObject.CompareTag("Death Zone"))
+        {
+            GameObject.Find("SoundManager").GetComponent<AudioSource>().PlayOneShot(burnSFX, 1);
+        }
+        
     }
 }
